@@ -62,7 +62,7 @@ void PlotViewer::OnRenderPlotViewer()
                 break;
         }
 
-        //_save_chart_popup->OnRender();
+        _save_chart_popup->OnRender();
 
 	}
 	End();

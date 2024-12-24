@@ -43,7 +43,7 @@ public:
 
 	void AddLayer(const std::shared_ptr<Layer>& layer);
 
-
+    void SaveChart();
 
 private:
 	Window_Settings _settings;
@@ -56,5 +56,7 @@ private:
 
 	std::vector<std::shared_ptr<Layer>> _layer_stack;
 
+
+    bool _save_chart = false;
 };
 

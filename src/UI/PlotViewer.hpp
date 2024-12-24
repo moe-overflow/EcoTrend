@@ -28,7 +28,7 @@ private:
 	void OnRenderCanvas();
 
 	std::unique_ptr<SelectChartTypePopup> _select_chart_type_popup = std::make_unique<SelectChartTypePopup>();
-	//std::unique_ptr<SaveChartPopup> _save_chart_popup = std::make_unique<SaveChartPopup>();
+	std::unique_ptr<SaveChartPopup> _save_chart_popup = std::make_unique<SaveChartPopup>();
 
 
 };

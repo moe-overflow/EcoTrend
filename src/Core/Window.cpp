@@ -2,6 +2,7 @@
 
 #include "implot.h"
 #include "../UI/Layer.hpp"
+#include "../../vendor/stb/stb_image_write.h"
 
 
 Window::Window(const Window_Settings& settings) :
@@ -97,6 +98,41 @@ void Window::Render()
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
+
+    if(_save_chart)
+    {
+        GLuint fbo;
+        GLuint texture = 0;
+        glGenFramebuffers(1, &fbo);
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+        {
+            glViewport(0, 0, width, height);
+            glClear(GL_COLOR_BUFFER_BIT);
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+            std::vector<unsigned char> pixels(width * height * 16);
+            glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+
+            stbi_flip_vertically_on_write(1); // Flip vertically
+            stbi_write_png("plot.png", width, height, 4, pixels.data(), width * 4);
+        }
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glDeleteFramebuffers(1, &fbo);
+
+        _save_chart = false;
+    }
+
     glfwSwapBuffers(_glfw_window);
 
     if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -124,5 +160,10 @@ void Window::Destroy() const
 void Window::AddLayer(const std::shared_ptr<Layer>& layer)
 {
     _layer_stack.emplace_back(layer);
+}
+
+void Window::SaveChart()
+{
+    _save_chart = true;
 }
 
