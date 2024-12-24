@@ -11,6 +11,7 @@ App::App()
 	// _window->AddLayer(std::make_shared<FileManagerLayer>());
 	_window->AddLayer(std::make_shared<Dockspace>());
     _window->AddLayer(std::make_shared<PlotViewer>());
+    _window->AddLayer(std::make_shared<MenuBar>());
 }
 
 void App::Run()
