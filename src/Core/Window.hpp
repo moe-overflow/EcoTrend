@@ -35,7 +35,7 @@ public:
 
 	void Render();
 	
-	bool Should_Close() const;
+	[[nodiscard]] bool Should_Close() const;
 
 	void Handle_Events() const;
 	

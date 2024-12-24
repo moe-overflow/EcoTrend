@@ -1,10 +1,8 @@
-#include <iostream>
-
 #include "App.hpp"
 
 int main(int argc, char** argv) 
 {
-	App app;
-	app.Run();
+    auto& app = App::Instance();
+    app.Run();
 }
 
