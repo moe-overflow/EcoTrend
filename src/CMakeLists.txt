@@ -6,7 +6,9 @@ file(
 
 add_executable(
         Ecotrend
+        ${CMAKE_SOURCE_DIR}/vendor/stb/stb_image_write.h
         ${SOURCE_FILES}
+
 )
 
 target_link_libraries(

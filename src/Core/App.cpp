@@ -2,6 +2,9 @@
 #include "../UI/Layer.hpp"
 #include "../UI/PlotViewer.hpp"
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "../../../vendor/stb/stb_image_write.h"
+
 App::App()
 {
 	Window::Window_Settings window_settings = { 1600, 900 };
