@@ -90,3 +90,7 @@ function(fetch_json)
 
 endfunction()
 
+function(fetch_matplot)
+    add_subdirectory(vendor/matplot)
+endfunction()
+

@@ -19,5 +19,6 @@ target_link_libraries(
     PUBLIC glad
     PUBLIC implot
     PRIVATE nlohmann_json::nlohmann_json
+    PUBLIC matplot
 )
 
