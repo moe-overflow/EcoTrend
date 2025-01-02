@@ -24,6 +24,8 @@ public:
         }
     }
 
+    [[nodiscard]] LayerType GetType() const override { return LayerType::Popup; }
+
 private:
     std::string _inserted_file_name;
 

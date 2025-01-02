@@ -7,6 +7,7 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "../UI/Layer.hpp"
 
 class Layer;
 
@@ -43,7 +44,31 @@ public:
 
 	void AddLayer(const std::shared_ptr<Layer>& layer);
 
+    template<typename T>
+    std::shared_ptr<T> GetLayer(LayerType type)
+    {
+        auto it = std::find_if
+                (
+                        _layer_stack.begin(), _layer_stack.end(),
+                        [type](const std::shared_ptr<Layer>& layer)
+                        {
+                            return layer->GetType() == type;
+                        }
+                );
+
+        if(it != _layer_stack.end()) return std::dynamic_pointer_cast<T>(*it);
+
+        throw std::runtime_error("Layer not found");
+
+    }
+
     void SaveChart();
+
+private:
+
+    void Init_ImGUI();
+
+    void Init_GLFW();
 
 private:
 	Window_Settings _settings;

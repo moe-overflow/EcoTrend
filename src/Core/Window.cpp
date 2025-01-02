@@ -1,13 +1,13 @@
+#include <stdexcept>
 #include "Window.hpp"
 
 #include "implot.h"
-#include "../UI/Layer.hpp"
 #include "../../vendor/stb/stb_image_write.h"
 
 
 Window::Window(const Window_Settings& settings) :
 	_settings{ std::move(settings) },
-	_glfw_window{nullptr}
+	_glfw_window{ nullptr }
 {}
 
 Window::~Window()
@@ -97,7 +97,6 @@ void Window::Render()
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 
     if(_save_chart)
     {

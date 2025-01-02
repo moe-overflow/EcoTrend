@@ -3,7 +3,7 @@
 #include "../Layer.hpp"
 #include "imgui.h"
 
-class SelectChartTypePopup : public Layer
+class SelectDataSourcePopup : public Layer
 {
 public:
     inline virtual void OnRender() override
@@ -21,6 +21,7 @@ public:
     }
 
 
+    [[nodiscard]] LayerType GetType() const override { return LayerType::Popup; }
 
 private:
 

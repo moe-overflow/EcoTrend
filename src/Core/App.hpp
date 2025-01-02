@@ -8,11 +8,11 @@ class App
 {
 public:
 
-    static App& Instance() {
-        static App instance; // Guaranteed to be created only once
+    static App& Instance()
+    {
+        static App instance;
         return instance;
     }
-
 
 	~App() = default;
 

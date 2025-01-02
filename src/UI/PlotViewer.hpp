@@ -18,6 +18,7 @@ class PlotViewer : public Layer
 public:
 	virtual void OnRender() override;
 
+    [[nodiscard]] LayerType GetType() const override { return LayerType::PlotViewer; }
 
 private:
 

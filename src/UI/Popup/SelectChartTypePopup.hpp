@@ -9,7 +9,7 @@
 #include "../PlotViewer.hpp"
 #include "../ChartType.hpp"
 
-class SelectChartTypePopup : public Layer
+class SelectDataSourcePopup : public Layer
 {
 public:
 	inline virtual void OnRender() override
@@ -33,6 +33,8 @@ public:
             ImGui::EndPopup();
         }
     }
+
+    [[nodiscard]] LayerType GetType() const override { return LayerType::Popup; }
 
 public:
 

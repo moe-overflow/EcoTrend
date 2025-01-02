@@ -23,5 +23,8 @@ public:
             App::Instance().GetWindow().SaveChart();
         }
     }
+
+    [[nodiscard]] LayerType GetType() const override { return LayerType::Popup; }
+
 };
 
