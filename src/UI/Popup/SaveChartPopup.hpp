@@ -10,9 +10,7 @@
 #include <glad/glad.h>
 #include <vector>
 
-
 #include "../../../vendor/stb/stb_image_write.h"
-
 #include "../Core/App.hpp"
 
 class SaveChartPopup : public Layer

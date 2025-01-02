@@ -51,7 +51,6 @@ public:
     inline void DeselectChartType() { _selected_chart = -1; }
 
 private:
-	bool _show;
 	int _selected_chart = -1;
 	
 	const std::array<std::string, 1> _chart_types
