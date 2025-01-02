@@ -4,6 +4,7 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../../../vendor/stb/stb_image_write.h"
+#include "../UI/FileManagerLayer.hpp"
 
 App::App()
 {
@@ -11,10 +12,10 @@ App::App()
 	_window = std::make_unique<Window>(std::move(window_settings));
 	_window->Init();
 
-	// _window->AddLayer(std::make_shared<FileManagerLayer>());
 	_window->AddLayer(std::make_shared<Dockspace>());
     _window->AddLayer(std::make_shared<PlotViewer>());
     _window->AddLayer(std::make_shared<MenuBar>());
+	_window->AddLayer(std::make_shared<FileManagerLayer>());
 }
 
 void App::Run()

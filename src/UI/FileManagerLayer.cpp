@@ -1,18 +1,19 @@
 #include "FileManagerLayer.hpp"
 
-#include "imgui.h"
 #include <iostream>
-
 #include <fstream>
 
+#include "imgui.h"
 #include "nlohmann/json.hpp"
+#include "../Utility/Files.hpp"
 
+namespace fs = std::filesystem;
 
 namespace
 {
 	void OpenFileDialog()
 	{
-		
+
 	}
 
 	auto LoadJSON(const std::string& file_name)
@@ -24,9 +25,9 @@ namespace
 		return json_data;
 	}
 
-	void Display_JSON(const nlohmann::json& json_data) 
+	void Display_JSON(const nlohmann::json& json_data)
 	{
-		for (auto& [key, value] : json_data.items()) 
+		for (auto& [key, value] : json_data.items())
 		{
 			if (value.is_string()) { ImGui::Text("%s: %s", key.c_str(), value.get<std::string>().c_str()); }
 			else if (value.is_number()) { ImGui::Text("%s: %f", key.c_str(), value.get<double>()); }
@@ -34,13 +35,12 @@ namespace
 		}
 	}
 
-
 	void HandleDragAndDrop()
 	{
 		if (ImGui::BeginDragDropTarget())
 		{
 			const auto* payload = ImGui::AcceptDragDropPayload("file_path");
-			
+
 			if (payload != nullptr)
 			{
 				std::string dropped = *((std::string*)payload->Data);
@@ -54,31 +54,36 @@ namespace
 		}
 	}
 
+
+
 }
 
 void FileManagerLayer::OnRender()
 {
-	ImGui::Text("JSON");
+    // ImGui::Text("Current selected file: %s", _selected_file.c_str());
+    _insert_dir_popup->OnRender();
 
-	if (ImGui::BeginChild("DropArea", ImVec2(0, 100), true))
-	{
-		ImGui::Text("Test");
-		HandleDragAndDrop();
-		ImGui::EndChild();
-	}
+    ImGui::Text("Current directory: %s", _current_folder.c_str());
+    std::vector<std::string> files = Files::GetJsonFiles(_current_folder);
 
-	
-	
-	/*ImGui::Begin("FileManagerLayer");
-	
-	if (ImGui::Button("Open JSON file"))
-	{
-		std::cout << "Button clicked!\n";
-		OpenFileDialog();
-		
-	}
-	ImGui::End();*/
+    if (ImGui::BeginListBox("Files:", ImVec2(-FLT_MIN, 300)))
+    {
+        for (const auto& file : files)
+            if (ImGui::Selectable(file.c_str()))
+                _selected_file = file;
+
+        ImGui::EndListBox();
+    }
+
+    if (!_selected_file.empty())
+    {
+        ImGui::Text("Current selected file: %s", _selected_file.c_str());
+        if (ImGui::Button("Use selected for data")) {  }
+    }
+
 
 }
+
+
 
 
