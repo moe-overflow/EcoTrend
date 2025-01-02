@@ -18,7 +18,9 @@ public:
 private:
 	// std::vector<std::string> _recent_files;
 
-    std::string _current_folder = R"(C:\Development\Cpp\LL)";
+    // todo: pasting path of directory not working in GUI
+    std::string _current_folder = R"(C:\Users\MOE\Desktop\EcoCollectorApp)";
+
     std::string _selected_file;
     std::unique_ptr<InsertJsonDirPopup> _insert_dir_popup = std::make_unique<InsertJsonDirPopup>();
 };

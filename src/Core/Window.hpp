@@ -75,12 +75,7 @@ private:
 
 	GLFWwindow* _glfw_window;
 
-	void Init_ImGUI();
-
-	void Init_GLFW();
-
 	std::vector<std::shared_ptr<Layer>> _layer_stack;
-
 
     bool _save_chart = false;
 };

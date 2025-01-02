@@ -119,7 +119,7 @@ void Window::Render()
             glClear(GL_COLOR_BUFFER_BIT);
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-            std::vector<unsigned char> pixels(width * height * 16);
+            std::vector<unsigned char> pixels(width * height * 4);
             glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
 
             stbi_flip_vertically_on_write(1); // Flip vertically
@@ -165,4 +165,3 @@ void Window::SaveChart()
 {
     _save_chart = true;
 }
-
