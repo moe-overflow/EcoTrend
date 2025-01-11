@@ -20,6 +20,8 @@ App::App()
 
 void App::Run()
 {
+	// _window->BindFramebuffer();
+	
 	while (!_window->Should_Close())
 	{
 		_window->Handle_Events();

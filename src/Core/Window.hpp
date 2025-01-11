@@ -48,13 +48,13 @@ public:
     std::shared_ptr<T> GetLayer(LayerType type)
     {
         auto it = std::find_if
-                (
-                        _layer_stack.begin(), _layer_stack.end(),
-                        [type](const std::shared_ptr<Layer>& layer)
-                        {
-                            return layer->GetType() == type;
-                        }
-                );
+        (
+			_layer_stack.begin(), _layer_stack.end(),
+			[type](const std::shared_ptr<Layer>& layer)
+			{
+				return layer->GetType() == type;
+			}
+        );
 
         if(it != _layer_stack.end()) return std::dynamic_pointer_cast<T>(*it);
 
@@ -64,11 +64,18 @@ public:
 
     void SaveChart();
 
+	void BindFramebuffer(int width, int height);
+
+	void SwapBuffers() const;
+
 private:
 
-    void Init_ImGUI();
+    void Init_ImGUI() const;
 
     void Init_GLFW();
+
+	void AttachDockspace(bool* p_open) const;
+
 
 private:
 	Window_Settings _settings;
