@@ -80,16 +80,35 @@ void PlotViewer::OnRenderPlotViewer()
 
 void PlotViewer::OnRenderCanvas()
 {
-//	if(BeginChild("Canvas", ImVec2(800, 600), true, ImGuiWindowFlags_NoMove))
-//    {
-//
-//    }
-//
-//	EndChild();
+
+    // Canvas Header
+    {
+        Begin("Canvas Header");
+
+        if (Button("Add sample chart"))
+            _canvas->AddImage("./sample_chart.png");
+
+        End();
+    }
 
 
-    Begin("Test");
-    End();
+    // Canvas
+    {
+        Begin("Canvas");
+
+        // White background for canvas
+        {
+            auto p_min = ImGui::GetWindowPos();
+            auto p_max = ImVec2(p_min.x + ImGui::GetWindowWidth(), p_min.y + ImGui::GetWindowHeight());
+
+            auto draw_list = ImGui::GetWindowDrawList();
+            draw_list->AddRectFilled(p_min, p_max, IM_COL32(255, 255, 255, 255));
+        }
+        _canvas->Render();
+
+
+        End();
+    }
 }
 
 void PlotViewer::SetPlotData(const std::vector<DataPoint>& data)

@@ -4,6 +4,10 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "../../../vendor/stb/stb_image_write.h"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "../../../vendor/stb/stb_image.h"
+
 #include "../UI/FileManagerLayer.hpp"
 
 App::App()

@@ -6,6 +6,7 @@ file(
 
 add_executable(
         Ecotrend
+        ${CMAKE_SOURCE_DIR}/vendor/stb/stb_image.h
         ${CMAKE_SOURCE_DIR}/vendor/stb/stb_image_write.h
         ${SOURCE_FILES}
 

@@ -15,5 +15,5 @@ void PlotExporter::ExportPlot(const std::vector<double> &x, const std::vector<do
 
     fig->size(800, 800);
 
-    fig->save("snapshot.png");
+    fig->save("sample_chart.png");
 }

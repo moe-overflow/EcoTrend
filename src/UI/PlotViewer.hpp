@@ -7,6 +7,7 @@
 #include "Popup/SaveChartPopup.hpp"
 #include "../Plot/PlotData.hpp"
 #include "../Utility/JSON_Handler.hpp"
+#include "Canvas/Canvas.hpp"
 
 enum class RenderMode
 {
@@ -40,5 +41,7 @@ private:
 
     std::vector<double> _x_values;
     std::vector<double> _y_values;
+
+    std::unique_ptr<Canvas> _canvas = std::make_unique<Canvas>();
 };
 
