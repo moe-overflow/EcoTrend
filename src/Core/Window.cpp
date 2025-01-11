@@ -98,27 +98,6 @@ void Window::Render()
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    if(_save_chart)
-    {
-        GLuint fbo;
-        GLuint texture = 0;
-        glGenFramebuffers(1, &fbo);
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
-        {
-            glViewport(0, 0, width, height);
-            glClear(GL_COLOR_BUFFER_BIT);
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
             std::vector<unsigned char> pixels(width * height * 4);
             glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
 
