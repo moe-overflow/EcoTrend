@@ -1,7 +1,6 @@
 #include "Layer.hpp"
 
 #include "implot.h"
-#include "../Core/App.hpp"
 
 void MenuBar::OnRender()
 {
@@ -10,7 +9,7 @@ void MenuBar::OnRender()
         if (ImGui::BeginMenu("File"))
         {
             if (ImGui::MenuItem("Open...")) {}
-            if (ImGui::MenuItem("Close")) { App::Instance().GetWindow().Destroy(); }
+            if (ImGui::MenuItem("Close")) { /* this->Destroy(); */ }
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("View"))
@@ -26,5 +25,3 @@ void MenuBar::OnRender()
         ImGui::EndMainMenuBar();
     }
 }
-
-

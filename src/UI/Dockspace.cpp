@@ -2,15 +2,13 @@
 
 #include "imgui.h"
 
-bool full_screen = true;
-
 void Dockspace::OnRender()
 {
-    static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode; // ImGuiDockNodeFlags_None;
+    static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None; //ImGuiDockNodeFlags_PassthruCentralNode;
 
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 
-    if(full_screen)
+    if (_full_screen)
     {
         const auto viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -20,13 +18,13 @@ void Dockspace::OnRender()
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, .0f);
 
         window_flags |=
-                ImGuiWindowFlags_NoTitleBar |
-                ImGuiWindowFlags_NoResize |
-                ImGuiWindowFlags_NoCollapse |
-                ImGuiWindowFlags_NoMove |
-                ImGuiWindowFlags_NoBringToFrontOnFocus |
-                ImGuiWindowFlags_NoNavFocus
-                ;
+            ImGuiWindowFlags_NoTitleBar |
+            ImGuiWindowFlags_NoResize |
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoMove |
+            ImGuiWindowFlags_NoBringToFrontOnFocus |
+            ImGuiWindowFlags_NoNavFocus
+            ;
 
     }
     else
@@ -38,7 +36,7 @@ void Dockspace::OnRender()
     bool active = true;
     ImGui::Begin("Dockspace", &active, window_flags);
 
-    if(full_screen)
+    if (_full_screen)
         ImGui::PopStyleVar(2);
 
     //ImGui::PopStyleVar(1);
@@ -52,3 +50,4 @@ void Dockspace::OnRender()
 
     ImGui::End();
 }
+

@@ -4,14 +4,10 @@
 #include "../Layer.hpp"
 
 #include "imgui.h"
-#include "imgui_impl_opengl3.h"
 #include "implot.h"
 
 #include <glad/glad.h>
 #include <vector>
-
-
-#include "../../../vendor/stb/stb_image_write.h"
 
 #include "../Core/App.hpp"
 
@@ -22,8 +18,11 @@ public:
     {
         if (ImGui::Button("Save chart..."))
         {
-            App::Instance().GetWindow().SaveChart();
+            // App::Instance().GetWindow().SaveChart();
         }
     }
+
+    [[nodiscard]] LayerType GetType() const override { return LayerType::Popup; }
+
 };
 

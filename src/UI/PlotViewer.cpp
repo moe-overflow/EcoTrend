@@ -2,38 +2,15 @@
 
 #include "imgui.h"
 #include "implot.h"
-
-#include "ChartType.hpp"
+#include "Popup/SelectChartTypePopup.hpp"
+#include "../Utility/PlotExporter.hpp"
 
 using namespace ImGui;
 using namespace ImPlot;
 
 void PlotViewer::OnRender()
 {
-    Begin("Main");
-
-	if (BeginTabBar("Switch"))
-	{
-		if(BeginTabItem("Plot")) 
-		{
-			OnRenderPlotViewer();
-			EndTabItem();
-		}
-		if(BeginTabItem("Canvas")) 
-		{
-			OnRenderCanvas();
-			EndTabItem();
-		}
-
-		EndTabBar();
-	}
-
-	End();
-}
-
-void PlotViewer::OnRenderPlotViewer()
-{
-    Begin("Plot");
+	Begin("Plot");
 	{
 		using namespace ImPlot;
 
@@ -43,41 +20,46 @@ void PlotViewer::OnRenderPlotViewer()
 			if (Button("Deselect current chart type")) { _select_chart_type_popup->DeselectChartType(); }
 		}
 
-        auto s = _select_chart_type_popup->GetCurrentChartType();
-        switch (s) {
-            case ChartType::None:
-                break;
+		auto s = _select_chart_type_popup->GetCurrent();
 
-            case ChartType::LineChart:
-                static ImPlotAxisFlags axis_flags = ImPlotAxisFlags_NoTickLabels;
-                if (BeginPlot("Test"))
-                {
-                    //SetupAxes(nullptr, nullptr, axis_flags, axis_flags);
-                    //SetupAxisLimits();
-                    int data[5] = { 15, 23, 62, 11, 512 };
-                    PlotBars("MyPlot", data, 5);
-                    EndPlot();
+		switch (s)
+		{
+		case ChartType::None:
+			// todo: render default empty screen
+			break;
 
-                }
-                break;
-        }
+		case ChartType::LineChart:
+			// static ImPlotAxisFlags axis_flags = ImPlotAxisFlags_NoTickLabels;
+			if (BeginPlot("Test"))
+			{
+				//SetupAxes(nullptr, nullptr, axis_flags, axis_flags);
+				//SetupAxisLimits();
 
-        _save_chart_popup->OnRender();
+				PlotLine("Data", _x_values.data(), _y_values.data(), static_cast<int>(_x_values.size()));
 
+				if (Button("Save as Image"))
+				{
+					auto limits = ImPlot::GetPlotLimits();
+					PlotExporter::ExportPlot(_x_values, _y_values, limits.X.Min, limits.X.Max, limits.Y.Min, limits.Y.Max);
+				}
+				EndPlot();
+
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 	End();
 }
 
-void PlotViewer::OnRenderCanvas()
+void PlotViewer::SetPlotData(const std::vector<DataPoint>& data)
 {
-//	if(BeginChild("Canvas", ImVec2(800, 600), true, ImGuiWindowFlags_NoMove))
-//    {
-//
-//    }
-//
-//	EndChild();
-
-
-    Begin("Test");
-    End();
+	_current_data = data;
+	for (size_t i = 0; i < _current_data.size(); i++)
+	{
+		_x_values.push_back(static_cast<double>(i));
+		_y_values.push_back(_current_data[i].value);
+	}
 }

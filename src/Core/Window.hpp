@@ -1,12 +1,15 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <iostream>
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+
+#include "../UI/Layer.hpp"
 
 class Layer;
 
@@ -28,22 +31,45 @@ public:
 	Window& operator=(const Window&) = delete;
 	Window& operator=(Window&&) = default;
 
-
 	~Window();
 
 	void Init();
 
 	void Render();
-	
+
 	[[nodiscard]] bool Should_Close() const;
 
 	void Handle_Events() const;
-	
+
 	void Destroy() const;
 
-	void AddLayer(const std::shared_ptr<Layer>& layer);
+	void AddLayer(std::shared_ptr<Layer> layer);
 
-    void SaveChart();
+	std::pair<int, int> GetWindowPosition();
+
+	template<typename T>
+	[[nodiscard]] std::shared_ptr<T> GetLayer(LayerType type)
+	{
+		auto it = std::find_if
+		(
+			_layer_stack.begin(), _layer_stack.end(),
+			[type](const std::shared_ptr<Layer>& layer)
+			{
+				return layer->GetType() == type;
+			}
+		);
+
+		if (it != _layer_stack.end()) return std::dynamic_pointer_cast<T>(*it);
+
+		throw std::runtime_error("Layer not found");
+
+	}
+
+	void Window::SwapBuffers() const;
+
+	static void Window::BindFramebuffer(int width, int height);
+
+	std::pair<double, double> GetMousePosition();
 
 private:
 	Window_Settings _settings;
@@ -54,9 +80,9 @@ private:
 
 	void Init_GLFW();
 
+	static void Window::AttachDockspace(bool* p_open);
+
 	std::vector<std::shared_ptr<Layer>> _layer_stack;
 
-
-    bool _save_chart = false;
 };
 

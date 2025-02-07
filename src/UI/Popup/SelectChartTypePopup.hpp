@@ -5,16 +5,15 @@
 
 #include "../Layer.hpp"
 #include "imgui.h"
-
 #include "../PlotViewer.hpp"
 #include "../ChartType.hpp"
 
 class SelectChartTypePopup : public Layer
 {
 public:
-	inline virtual void OnRender() override
+	virtual void OnRender() override
 	{
-        if (ImGui::Button("Choose chart type"))
+        if (ImGui::Button("Open Popup"))
         {
             ImGui::OpenPopup("Select Item Popup");
         }
@@ -34,9 +33,7 @@ public:
         }
     }
 
-public:
-
-    [[nodiscard]] ChartType GetCurrentChartType() const
+    [[nodiscard]] ChartType GetCurrent() const
     {
         switch (_selected_chart)
         {
@@ -48,7 +45,9 @@ public:
         }
     }
     
-    inline void DeselectChartType() { _selected_chart = -1; }
+    void DeselectChartType() { _selected_chart = -1; }
+    
+    [[nodiscard]] LayerType GetType() const override { return LayerType::Popup; }
 
 private:
 	bool _show;
@@ -58,8 +57,6 @@ private:
 	{
 		"Line Chart"
 	};
-
-
 
 
 };

@@ -2,6 +2,6 @@
 
 enum class ChartType
 {
-    None = 0,
-    LineChart
+	None = 0,
+	LineChart
 };
