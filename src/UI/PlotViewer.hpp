@@ -3,9 +3,7 @@
 #include <memory>
 
 #include "Layer.hpp"
-#include "Popup/SelectChartTypePopup.hpp"
-#include "Popup/SaveChartPopup.hpp"
-#include "Popup/ExportReportPopup.hpp"
+#include "Popup/Popup.hpp"
 #include "../Utility/JsonHandler.hpp"
 
 #include "../Data/PlotData.hpp"
@@ -13,7 +11,7 @@
 class PlotViewer : public Layer
 {
 public:
-	virtual void OnRender() override;
+	void OnRender() override;
 
 	[[nodiscard]] LayerType GetType() const override { return LayerType::PlotViewer; }
 

@@ -5,13 +5,12 @@
 #include <memory>
 
 #include "Layer.hpp"
-#include "Popup/InsertJsonDirPopup.hpp"
 #include "PlotViewer.hpp"
 
 class FileManagerLayer : public Layer
 {
 public:
-	virtual void OnRender() override;
+	void OnRender() override;
 
 	[[nodiscard]] LayerType GetType() const override { return LayerType::FileManagerLayer; }
 

@@ -2,7 +2,7 @@
 
 #include "imgui.h"
 #include "implot.h"
-#include "Popup/SelectChartTypePopup.hpp"
+#include "Popup/Popup.hpp"
 #include "../Utility/PlotExporter.hpp"
 
 using namespace ImGui;

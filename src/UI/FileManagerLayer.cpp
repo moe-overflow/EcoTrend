@@ -1,13 +1,9 @@
 #include "FileManagerLayer.hpp"
 
-#include "imgui.h"
+#include <imgui.h>
 #include <iostream>
 
-#include <fstream>
-
-#include "nlohmann/json.hpp"
 #include "../Utility/Files.hpp"
-#include "../Utility/JsonHandler.hpp"
 #include "../Core/App.hpp"
 
 void FileManagerLayer::OnRender()
