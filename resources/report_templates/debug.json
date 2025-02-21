@@ -1,0 +1,19 @@
+{
+  "Logo": {
+    "x": 380,
+    "y": 750
+  },
+  "MeasurementTitle": {
+    "x": 60,
+    "y": 700
+  },
+  "TrendPlot": {
+    "x": 10,
+    "y": 250
+  },
+  "StatisticsPlot": {
+    "x": 380,
+    "y": 750
+  }
+
+}

@@ -8,9 +8,7 @@
 #include "nlohmann/json.hpp"
 #include "../Utility/Files.hpp"
 #include "../Utility/JsonHandler.hpp"
-#include "PlotViewer.hpp"
 #include "../Core/App.hpp"
-#include "MainLayer.hpp"
 
 void FileManagerLayer::OnRender()
 {
@@ -38,8 +36,7 @@ void FileManagerLayer::OnRender()
 		{
 			// read content of json file and assign read data to current plot data (PlotViewer)
 			auto json_content = JSON_Handler::ReadJsonFile(_selected_file);
-			auto viewer = App::Instance().GetWindow().GetLayer<MainLayer>(LayerType::Main)->GetPlotViewer();
-			viewer->SetPlotData(json_content);
+			App::Instance().GetWindow().GetLayer<PlotViewer>(LayerType::PlotViewer)->SetPlotData(json_content);
 		}
 	}
 

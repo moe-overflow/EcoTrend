@@ -14,6 +14,9 @@ void PlotViewer::OnRender()
 	{
 		using namespace ImPlot;
 
+		auto window_size = GetWindowSize();
+		ImPlotRect current_limits;
+
 		// Obere Leiste
 		{
 			_select_chart_type_popup->OnRender();
@@ -21,7 +24,7 @@ void PlotViewer::OnRender()
 		}
 
 		auto s = _select_chart_type_popup->GetCurrent();
-
+		
 		switch (s)
 		{
 		case ChartType::None:
@@ -29,37 +32,59 @@ void PlotViewer::OnRender()
 			break;
 
 		case ChartType::LineChart:
+		{
 			// static ImPlotAxisFlags axis_flags = ImPlotAxisFlags_NoTickLabels;
-			if (BeginPlot("Test"))
+			// auto title = "Plot"; // todo: set name of json file as title
+			if (BeginPlot("Test", ImVec2(window_size.x, window_size.y * 0.75)))
 			{
 				//SetupAxes(nullptr, nullptr, axis_flags, axis_flags);
 				//SetupAxisLimits();
+				PlotLine("Data", _plot_data._Timestamps.data(), _plot_data._Values.data(), static_cast<int>(_plot_data._Values.size()));
 
-				PlotLine("Data", _x_values.data(), _y_values.data(), static_cast<int>(_x_values.size()));
-
-				if (Button("Save as Image"))
-				{
-					auto limits = ImPlot::GetPlotLimits();
-					PlotExporter::ExportPlot(_x_values, _y_values, limits.X.Min, limits.X.Max, limits.Y.Min, limits.Y.Max);
-				}
+				// SetNextPlotTicksX(timestamps.data(), time_labels.data(), timestamps.size(), ImPlot::TickFormatter);
+				current_limits = ImPlot::GetPlotLimits();
 				EndPlot();
-
 			}
 			break;
-
+		}
+			
 		default:
 			break;
 		}
+
+		//	// capture current limits to dataset
+		_plot_data._PlotLimits = {
+			current_limits.X.Min,
+			current_limits.X.Max,
+			current_limits.Y.Min,
+			current_limits.Y.Max
+		
+		};
+		
+		this->UpdatePlotName(_export_report_popup->GetPlotName());
+		_export_report_popup->SetPlotData(_plot_data); 
+		
+		_export_report_popup->OnRender();
+
 	}
 	End();
 }
 
-void PlotViewer::SetPlotData(const std::vector<DataPoint>& data)
+void PlotViewer::SetPlotData(const nlohmann::json& data)
 {
-	_current_data = data;
-	for (size_t i = 0; i < _current_data.size(); i++)
+	_plot_data._Values.clear();
+	_plot_data._Timestamps.clear();
+	
+	int counter{ 0 };
+	for (const auto& entry : data)
 	{
-		_x_values.push_back(static_cast<double>(i));
-		_y_values.push_back(_current_data[i].value);
+		//auto timestamp = JSON_Handler::ParseTimestamp(entry["_time"]);
+		//_plot_data.Timestamps.push_back();
+		
+		
+		_plot_data._Timestamps.push_back(counter);
+		counter++;
+
+		_plot_data._Values.push_back(std::stod(entry["_value"].get<std::string>()));
 	}
 }

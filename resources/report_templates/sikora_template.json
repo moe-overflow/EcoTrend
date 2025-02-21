@@ -1,0 +1,46 @@
+{
+  "Title": {
+    "FontFamily": "Times-BoldItalic",
+    "FontSize": 24,
+    "FontColor": "c",
+    "FontBold": false
+  },
+  "Logo": {
+    "ImageName": "SIKORA"
+  },
+  "Header": {
+    "FontFamily": "Helvetica",
+    "FontSize": 12,
+    "FontColor": "c",
+    "FontBold": false
+  },
+  "MeasurementTitle": {
+    "FontFamily": "Times-BoldItalic",
+    "FontSize": 24,
+    "FontColor": "c",
+    "FontBold": false
+  },
+  "TrendPlot": {
+    "Position": {
+      "X": 12,
+      "Y": 4
+    },
+    "CurveColor": "todo"
+  },
+  "StatisticsPlot": {
+    "Position": {
+      "X": 23,
+      "Y": 523
+    },
+    "CurveColor": "todo"
+  },
+  "StatisticsValues": {
+    "FontFamily": "fa",
+    "FontSize": 24,
+    "FontColor": "c",
+    "FontBold": false
+  },
+  "Footer": {
+
+  }
+}

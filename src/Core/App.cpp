@@ -1,6 +1,5 @@
 #include "App.hpp"
 #include "../UI/Layer.hpp"
-#include "../UI/MainLayer.hpp"
 #include "../UI/FileManagerLayer.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -14,8 +13,9 @@ App::App()
 
 	_window->AddLayer(std::make_shared<Dockspace>());
 	_window->AddLayer(std::make_shared<MenuBar>());
-	_window->AddLayer(std::make_shared<MainLayer>());
+	_window->AddLayer(std::make_shared<PlotViewer>());
 	_window->AddLayer(std::make_shared<FileManagerLayer>());
+
 }
 
 void App::Run()

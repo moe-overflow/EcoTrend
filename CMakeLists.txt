@@ -15,6 +15,11 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
+set(TEMPLATE_PATH "${CMAKE_SOURCE_DIR}/resources/report_templates")
+add_definitions(-DTEMPLATE_PATH="${TEMPLATE_PATH}")
+
+set(ASSETS_PATH "${CMAKE_SOURCE_DIR}/resources/assets")
+add_definitions(-DASSETS_PATH="${ASSETS_PATH}")
 
 
 add_subdirectory(src)

@@ -5,8 +5,10 @@
 #include "Layer.hpp"
 #include "Popup/SelectChartTypePopup.hpp"
 #include "Popup/SaveChartPopup.hpp"
+#include "Popup/ExportReportPopup.hpp"
 #include "../Utility/JsonHandler.hpp"
-#include "Canvas/Canvas.hpp"
+
+#include "../Data/PlotData.hpp"
 
 class PlotViewer : public Layer
 {
@@ -15,22 +17,23 @@ public:
 
 	[[nodiscard]] LayerType GetType() const override { return LayerType::PlotViewer; }
 
-	void SetPlotData(const std::vector<DataPoint>& data);
+	void SetPlotData(const nlohmann::json& data); 
+	PlotData& GetPlotData() { return _plot_data; }
 
+	void SetPlotName(const std::string& name) { _plot_data._ImagePath = name; }
 
 private:
 
 	std::unique_ptr<SelectChartTypePopup> _select_chart_type_popup = std::make_unique<SelectChartTypePopup>();
 	std::unique_ptr<SaveChartPopup> _save_chart_popup = std::make_unique<SaveChartPopup>();
+	std::unique_ptr<ExportReportPopup> _export_report_popup = std::make_unique<ExportReportPopup>();
 
-	std::vector<DataPoint> _current_data;
 
-	std::vector<double> _x_values;
-	std::vector<double> _y_values;
+	PlotData _plot_data;
 
 	/**/
 
-	std::unique_ptr<Canvas> _canvas = std::make_unique<Canvas>();
+	void UpdatePlotName(const std::string& new_name) { _plot_data._ImagePath = new_name; }
 
 };
 

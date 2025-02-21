@@ -25,6 +25,9 @@ public:
 	virtual void OnRender() {};
 	virtual void OnUpdate() {};
 
+	virtual void OnAttach() {};
+	// virtual void OnDetach() {};
+
 	[[nodiscard]] virtual LayerType GetType() const = 0;
 };
 
