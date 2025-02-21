@@ -1,13 +1,10 @@
 #include "Window.hpp"
 
-#include "implot.h"
 #include "../UI/Layer.hpp"
+#include "implot.h"
 
 
-Window::Window(const Window_Settings& settings) :
-	_settings{ std::move(settings) },
-	_glfw_window{nullptr}
-{}
+Window::Window(Window_Settings const& settings) : _settings{ std::move(settings) }, _glfw_window{ nullptr } { }
 
 Window::~Window()
 {
@@ -16,18 +13,17 @@ Window::~Window()
 
     ImGui::DestroyContext();
     ImPlot::DestroyContext();
-    
+
     if (_glfw_window)
     {
         glfwDestroyWindow(_glfw_window);
     }
     glfwTerminate();
-    
 }
 
 void Window::Init()
 {
-	Init_GLFW();
+    Init_GLFW();
     Init_ImGUI();
     ImPlot::CreateContext();
 }
@@ -41,7 +37,7 @@ void Window::Init_GLFW()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     _glfw_window = glfwCreateWindow(_settings.Width, _settings.Height, _settings.Title.c_str(), nullptr, nullptr);
-    
+
     if (!_glfw_window)
         glfwTerminate();
 
@@ -53,7 +49,7 @@ void Window::Init_GLFW()
     // Enable vsync
     glfwSwapInterval(true);
 
-    gladLoadGLLoader(reinterpret_cast<GLADloadproc> (glfwGetProcAddress)); // todo: exception handling
+    gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)); // todo: exception handling
 
     glViewport(0, 0, buffer_width, buffer_height);
     BindFramebuffer(buffer_width, buffer_height);
@@ -64,22 +60,20 @@ void Window::Init_ImGUI()
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO();
+    (void) io;
 
     io.ConfigFlags |=
-        ImGuiConfigFlags_DockingEnable |
-        ImGuiConfigFlags_NavEnableKeyboard |
-        ImGuiConfigFlags_ViewportsEnable;
+            ImGuiConfigFlags_DockingEnable | ImGuiConfigFlags_NavEnableKeyboard | ImGuiConfigFlags_ViewportsEnable;
 
-    
-    const auto glsl_version = "#version 330";
+
+    auto const glsl_version = "#version 330";
     ImGui_ImplOpenGL3_Init(glsl_version);
     ImGui_ImplGlfw_InitForOpenGL(_glfw_window, true);
 
 
     //glBindFramebuffer(GL_FRAMEBUFFER, 0);
     //glEnable(GL_DEPTH_TEST);
-
 }
 
 void Window::Render()
@@ -92,7 +86,7 @@ void Window::Render()
     AttachDockspace(&doc);
 
     /**/
-    
+
     for (auto& layer : _layer_stack)
     {
         layer->OnRender();
@@ -123,7 +117,7 @@ void Window::Render()
 }
 
 
-void Window::AttachDockspace(bool* p_open) 
+void Window::AttachDockspace(bool* p_open)
 {
     static bool fullscreen = true;
     static bool padding = false;
@@ -132,22 +126,18 @@ void Window::AttachDockspace(bool* p_open)
 
     if (fullscreen)
     {
-        const ImGuiViewport* viewport = ImGui::GetMainViewport();
-        
+        ImGuiViewport const* viewport = ImGui::GetMainViewport();
+
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
         ImGui::SetNextWindowViewport(viewport->ID);
-     
+
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 
-        window_flags |=
-            ImGuiWindowFlags_NoTitleBar |
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize |
-            ImGuiWindowFlags_NoMove |
-            ImGuiWindowFlags_NoBringToFrontOnFocus |
-            ImGuiWindowFlags_NoNavFocus;
+        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize
+                        | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus
+                        | ImGuiWindowFlags_NoNavFocus;
     }
     else
     {
@@ -190,19 +180,19 @@ void Window::BindFramebuffer(int width, int height)
 
     glGenFramebuffers(1, &frame_buffer);
     glBindFramebuffer(GL_FRAMEBUFFER, frame_buffer);
-    
+
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-    
+
     glGenRenderbuffers(1, &render_buffer);
     glBindRenderbuffer(GL_RENDERBUFFER, render_buffer);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, render_buffer);
-    
+
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cerr << "Error: Framebuffer incomplete!" << std::endl;
 
@@ -246,4 +236,3 @@ std::pair<int, int> Window::GetWindowPosition()
     glfwGetWindowPos(_glfw_window, &x, &y);
     return std::pair<int, int>(x, y);
 }
-

@@ -8,6 +8,3 @@ void SaveChartPopup::OnRender()
         // App::Instance().GetWindow().SaveChart();
     }
 }
-
-
-

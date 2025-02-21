@@ -1,15 +1,15 @@
 #include "../Utility/JsonHandler.hpp"
 
-#include <sstream>
-#include <iomanip>
 #include <fstream>
-#include <string>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
+#include <string>
 
 
 using namespace nlohmann;
 
-std::time_t JSON_Handler::ParseTimestamp(const std::string& iso_time)
+std::time_t JSON_Handler::ParseTimestamp(std::string const& iso_time)
 {
     std::tm tm = {};
     std::istringstream ss(iso_time);
@@ -17,7 +17,7 @@ std::time_t JSON_Handler::ParseTimestamp(const std::string& iso_time)
     return std::mktime(&tm);
 }
 
-json JSON_Handler::ReadJsonFile(const std::string& filename)
+json JSON_Handler::ReadJsonFile(std::string const& filename)
 {
     std::ifstream file(filename);
     if (file.fail())

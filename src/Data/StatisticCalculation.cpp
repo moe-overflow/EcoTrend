@@ -1,12 +1,15 @@
 #include "StatisticCalculation.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <numeric>
-#include <array>
 
 
-Statistics StatisticCalculation::CalculateStatistics(const std::vector<double>& values, const PredefinedStatisticsValues& predefined)
+Statistics StatisticCalculation::CalculateStatistics(
+        std::vector<double> const& values,
+        PredefinedStatisticsValues const& predefined
+)
 {
 
     Statistics statistics{};
@@ -17,17 +20,21 @@ Statistics StatisticCalculation::CalculateStatistics(const std::vector<double>& 
 
     /**/
 
-    const auto size = values.size();
+    auto const size = values.size();
 
     // Mean value
-    const auto mean = std::accumulate(values.begin(), values.end(), 0.0) / values.size();
+    auto const mean = std::accumulate(values.begin(), values.end(), 0.0) / values.size();
     statistics.Mean = mean;
 
     // STD deviation
     statistics.STD_Deviation = std::sqrt(
-        std::accumulate(values.begin(), values.end(), 0.0, [&mean](double acc, double value) {
-            return acc + std::pow((value - mean), 2);
-        }) / size
+            std::accumulate(
+                    values.begin(),
+                    values.end(),
+                    0.0,
+                    [&mean](double acc, double value) { return acc + std::pow((value - mean), 2); }
+            )
+            / size
     );
 
     // Min & Max
@@ -41,8 +48,10 @@ Statistics StatisticCalculation::CalculateStatistics(const std::vector<double>& 
 
         for (auto value : values)
         {
-            if (value < predefined.LSL) count_below_lsl++;
-            if (value > predefined.USL) count_above_usl++;
+            if (value < predefined.LSL)
+                count_below_lsl++;
+            if (value > predefined.USL)
+                count_above_usl++;
         }
         statistics.BelowLSL = (count_below_lsl / values.size()) * 100;
         statistics.AboveUSL = (count_above_usl / values.size()) * 100;
@@ -55,15 +64,16 @@ Statistics StatisticCalculation::CalculateStatistics(const std::vector<double>& 
         statistics.CP = (predefined.USL - predefined.LSL) / (6 * statistics.STD_Deviation);
 
         statistics.CPK = std::min(
-            (predefined.USL - mean) / 3 * statistics.STD_Deviation,
-            (mean - predefined.LSL) / 3 * statistics.STD_Deviation
+                (predefined.USL - mean) / 3 * statistics.STD_Deviation,
+                (mean - predefined.LSL) / 3 * statistics.STD_Deviation
         );
     }
 
     return statistics;
 }
 
-StatisticCalculation::Axes StatisticCalculation::DetermineAxes(const Statistics& statistics, const std::vector<double>& values)
+StatisticCalculation::Axes
+StatisticCalculation::DetermineAxes(Statistics const& statistics, std::vector<double> const& values)
 {
     std::array<uint64_t, STEP_SIZE + 1> frequency{};
 
@@ -71,7 +81,7 @@ StatisticCalculation::Axes StatisticCalculation::DetermineAxes(const Statistics&
     std::array<double, STEP_SIZE + 1> steps{};
     std::array<double, STEP_SIZE + 1> frequency_percentage{};
 
-    const auto offset = (statistics.USL - statistics.LSL) / STEP_SIZE;
+    auto const offset = (statistics.USL - statistics.LSL) / STEP_SIZE;
     for (size_t i = 0; i < STEP_SIZE + 1; i++)
     {
         frequency[i] = 0;
@@ -80,7 +90,7 @@ StatisticCalculation::Axes StatisticCalculation::DetermineAxes(const Statistics&
     }
 
     // Verteilung/Häufigkeit der Werte
-    for (const auto value : values)
+    for (auto const value : values)
     {
         for (size_t i = 0; i < STEP_SIZE + 1; i++)
         {
@@ -99,6 +109,4 @@ StatisticCalculation::Axes StatisticCalculation::DetermineAxes(const Statistics&
     }
 
     return std::make_pair(steps, frequency_percentage);
-
 }
-

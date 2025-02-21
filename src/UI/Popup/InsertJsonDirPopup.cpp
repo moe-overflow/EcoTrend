@@ -12,7 +12,6 @@ void InsertJsonDirPopup::OnRender()
     {
         if (ImGui::InputText("Insert file name", const_cast<char*>(_inserted_file_name.c_str()), 50))
         {
-
         }
         ImGui::EndPopup();
     }

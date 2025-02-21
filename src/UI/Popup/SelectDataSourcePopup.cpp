@@ -14,5 +14,3 @@ void SelectDataSourcePopup::OnRender()
         ImGui::EndPopup();
     }
 }
-
-

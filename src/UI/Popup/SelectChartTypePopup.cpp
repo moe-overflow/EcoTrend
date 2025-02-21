@@ -36,5 +36,7 @@ ChartType SelectChartTypePopup::GetCurrent() const
     }
 }
 
-void SelectChartTypePopup::DeselectChartType() { _selected_chart = -1; }
-
+void SelectChartTypePopup::DeselectChartType()
+{
+    _selected_chart = -1;
+}

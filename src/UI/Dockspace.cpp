@@ -10,22 +10,16 @@ void Dockspace::OnRender()
 
     if (_full_screen)
     {
-        const auto viewport = ImGui::GetMainViewport();
+        auto const viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
         ImGui::SetNextWindowViewport(viewport->ID);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, .0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, .0f);
 
-        window_flags |=
-            ImGuiWindowFlags_NoTitleBar |
-            ImGuiWindowFlags_NoResize |
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoMove |
-            ImGuiWindowFlags_NoBringToFrontOnFocus |
-            ImGuiWindowFlags_NoNavFocus
-            ;
-
+        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse
+                        | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus
+                        | ImGuiWindowFlags_NoNavFocus;
     }
     else
     {
@@ -50,4 +44,3 @@ void Dockspace::OnRender()
 
     ImGui::End();
 }
-

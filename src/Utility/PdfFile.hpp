@@ -1,23 +1,20 @@
 #pragma once
 
-#include <string>
-#include <iostream>
+#include "../Template/Template.hpp"
 #include <hpdf.h>
 #include <hpdf_types.h>
-#include "../Template/Template.hpp"
+#include <iostream>
+#include <string>
 
 namespace
 {
-    void PdfErrorHandler(
-        HPDF_STATUS error_no,
-        HPDF_STATUS detail_no,
-        void* user_data)
+    void PdfErrorHandler(HPDF_STATUS error_no, HPDF_STATUS detail_no, void* user_data)
     {
-        std::cerr << "ERROR: " <<
-            "error_no = " << std::hex << error_no << "," <<
-            "detail_no = " << std::dec << detail_no << std::endl;
+        std::cerr << "ERROR: "
+                  << "error_no = " << std::hex << error_no << ","
+                  << "detail_no = " << std::dec << detail_no << std::endl;
     }
-}
+} // namespace
 
 struct Position final
 {
@@ -27,7 +24,7 @@ struct Position final
 class PdfFile
 {
 public:
-    PdfFile(const std::string& file_name, const Template& pdf_template);
+    PdfFile(std::string const& file_name, Template const& pdf_template);
 
     ~PdfFile();
 
@@ -46,12 +43,11 @@ private:
 
     /**/
 
-    void DrawImage(const std::string& image_path, const Position& position, float height_ratio) const;
+    void DrawImage(std::string const& image_path, Position const& position, float height_ratio) const;
 
-    void DrawText(const std::string& text, Position& position, TextSettings& settings) const;
+    void DrawText(std::string const& text, Position& position, TextSettings& settings) const;
 
 private:
-
     struct PageSettings
     {
         float Width, Height;
@@ -59,13 +55,11 @@ private:
     };
 
 
-	std::string _file_name;
+    std::string _file_name;
     HPDF_Doc _document;
     HPDF_Doc _page;
     PageSettings _page_settings;
 
 
     std::unique_ptr<Template> _template;
-
-
 };

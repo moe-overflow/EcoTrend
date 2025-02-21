@@ -21,15 +21,12 @@ struct Statistics
 class StatisticCalculation
 {
 public:
-
     constexpr static size_t STEP_SIZE = 20;
     using Axis = std::array<double, STEP_SIZE + 1>;
     using Axes = std::pair<Axis, Axis>;
 
-    static Statistics CalculateStatistics(const std::vector<double>& values, const PredefinedStatisticsValues& predefined);
+    static Statistics
+    CalculateStatistics(std::vector<double> const& values, PredefinedStatisticsValues const& predefined);
 
-    static Axes DetermineAxes(const Statistics& statistics, const std::vector<double>& values);
-
-
+    static Axes DetermineAxes(Statistics const& statistics, std::vector<double> const& values);
 };
-

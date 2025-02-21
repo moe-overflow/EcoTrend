@@ -1,8 +1,8 @@
 #pragma once
 
 #include <ctime>
-#include <vector>
 #include <string>
+#include <vector>
 
 #include <nlohmann/json.hpp>
 
@@ -15,11 +15,8 @@ struct DataPoint
 class JSON_Handler
 {
 public:
-    static std::time_t ParseTimestamp(const std::string& iso_time);
+    static std::time_t ParseTimestamp(std::string const& iso_time);
     //static std::vector<DataPoint> ReadJsonFile(const std::string& filename);
 
-    static nlohmann::json ReadJsonFile(const std::string& filename);
-
-
+    static nlohmann::json ReadJsonFile(std::string const& filename);
 };
-

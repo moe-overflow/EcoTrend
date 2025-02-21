@@ -1,11 +1,11 @@
 #include "Popup.hpp"
 
-#include <string>
 #include <imgui.h>
 #include <imgui_stdlib.h>
+#include <string>
 
-#include "../../Utility/PlotExporter.hpp"
 #include "../../Utility/PdfFile.hpp"
+#include "../../Utility/PlotExporter.hpp"
 
 inline constexpr auto SIKORA_TEMPLATE_FILE_NAME{ "sikora_template" };
 
@@ -13,7 +13,7 @@ namespace
 {
     float selected_color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
     std::string str_color = "blue"; // default color
-}
+} // namespace
 
 void ExportReportPopup::OnRender()
 {
@@ -26,8 +26,8 @@ void ExportReportPopup::OnRender()
     if (BeginPopupModal("ExportReportPopup", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
     {
         PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.15f, 0.15f, 0.15f, 1.0f)); // Dark background
-        PushStyleVar(ImGuiStyleVar_WindowRounding, 10.0f); // Rounded corners
-        PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10)); // Padding
+        PushStyleVar(ImGuiStyleVar_WindowRounding, 10.0f);                    // Rounded corners
+        PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));             // Padding
 
         Text("Modify report settings");
 
@@ -47,11 +47,9 @@ void ExportReportPopup::OnRender()
             ImGui::ColorPicker4("Pick Line Color", selected_color);
 
             // Apply the selected color to the plot
-            str_color = "rgba(" +
-                        std::to_string(int(selected_color[0] * 255)) + "," +
-                        std::to_string(int(selected_color[1] * 255)) + "," +
-                        std::to_string(int(selected_color[2] * 255)) + "," +
-                        std::to_string(selected_color[3]) + ")";
+            str_color = "rgba(" + std::to_string(int(selected_color[0] * 255)) + ","
+                        + std::to_string(int(selected_color[1] * 255)) + ","
+                        + std::to_string(int(selected_color[2] * 255)) + "," + std::to_string(selected_color[3]) + ")";
         }
 
         /**/
@@ -84,7 +82,6 @@ void ExportReportPopup::OnRender()
             }
 
 
-
             CloseCurrentPopup();
         }
         SameLine();
@@ -98,5 +95,3 @@ void ExportReportPopup::OnRender()
         EndPopup();
     }
 }
-
-

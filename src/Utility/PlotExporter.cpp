@@ -5,11 +5,12 @@
 using namespace matplot;
 
 bool PlotExporter::ExportPlot(
-    const std::string file_name,
-    const std::vector<double>& x,
-    const std::vector<double>& y,
-    PlotLimits limits,
-    const std::string color)
+        const std::string file_name,
+        std::vector<double> const& x,
+        std::vector<double> const& y,
+        PlotLimits limits,
+        const std::string color
+)
 {
     // TODO: Create json config file for plot parameters
 
@@ -29,9 +30,9 @@ bool PlotExporter::ExportPlot(
 
 
     fig->size(1000, 500);
-    
+
     auto result = fig->save(file_name + ".png");
-    
+
     /*
         The first attmept to save the image fails because image is only saved
         correctly to file system after appliction has been terminated.
@@ -42,7 +43,7 @@ bool PlotExporter::ExportPlot(
     return result;
 }
 
-bool PlotExporter::ExportStatisticsPlot(const std::string file_name, const StatisticCalculation::Axes& axes)
+bool PlotExporter::ExportStatisticsPlot(const std::string file_name, StatisticCalculation::Axes const& axes)
 {
     auto fig = figure(true);
     auto ax = fig->add_axes();
@@ -54,17 +55,16 @@ bool PlotExporter::ExportStatisticsPlot(const std::string file_name, const Stati
     std::vector<double> x_ticks;
     for (size_t i = 0; i < StatisticCalculation::STEP_SIZE + 1; i++)
     {
-        if (i % 4 == 0) 
+        if (i % 4 == 0)
         {
             x_ticks.push_back(axes.first[i]);
         }
     }
     ax->xticks(x_ticks);
-    
 
 
-    ax->yticks({0, 25, 50, 75, 100});
-    ax->ylim({0.0, 100.00 });
+    ax->yticks({ 0, 25, 50, 75, 100 });
+    ax->ylim({ 0.0, 100.00 });
 
     ax->font_size(32);
     //xlabel("Bins");
@@ -72,7 +72,7 @@ bool PlotExporter::ExportStatisticsPlot(const std::string file_name, const Stati
 
     ax->font(""); // ?
     ax->title_font_weight();
-   
+
     /**/
 
     fig->size(2000, 2000);
@@ -80,4 +80,3 @@ bool PlotExporter::ExportStatisticsPlot(const std::string file_name, const Stati
 
     return fig->save(file_name + ".png");
 }
-

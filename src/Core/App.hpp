@@ -7,25 +7,23 @@
 class App
 {
 public:
-	App();
+    App();
 
-	static App& Instance() 
-	{
-		static App instance;
-		return instance;
-	}
+    static App& Instance()
+    {
+        static App instance;
+        return instance;
+    }
 
-	~App() = default;
+    ~App() = default;
 
-	void Run();
+    void Run();
 
-	[[nodiscard]] Window& GetWindow() const { return *_window; }
+    [[nodiscard]] Window& GetWindow() const
+    {
+        return *_window;
+    }
 
 private:
-	std::unique_ptr<Window> _window;
-
-
+    std::unique_ptr<Window> _window;
 };
-
-
-
