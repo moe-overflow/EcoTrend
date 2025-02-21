@@ -39,9 +39,14 @@ void Template::Apply()
 	_template_struct.StatisticsPlotSettings.Y = _template_file["StatisticsPlot"]["Position"]["Y"];
 	_template_struct.StatisticsPlotSettings.CurveColor = _template_file["StatisticsPlot"]["CurveColor"];
 
-	_template_struct.StatisticsValuesSettings.FontFamily = _template_file["StatisticsValues"]["FontFamily"];
-	_template_struct.StatisticsValuesSettings.FontSize = _template_file["StatisticsValues"]["FontSize"];
-	_template_struct.StatisticsValuesSettings.FontColor = _template_file["StatisticsValues"]["FontColor"];
-	_template_struct.StatisticsValuesSettings.FontBold = _template_file["StatisticsValues"]["FontBold"];
+    _template_struct.StatisticsValuesSettings.FontFamily = _template_file["StatisticsValues"]["FontFamily"];
+    _template_struct.StatisticsValuesSettings.FontSize = _template_file["StatisticsValues"]["FontSize"];
+    _template_struct.StatisticsValuesSettings.FontColor = _template_file["StatisticsValues"]["FontColor"];
+    _template_struct.StatisticsValuesSettings.FontBold = _template_file["StatisticsValues"]["FontBold"];
+
+    _template_struct.FooterTextSettings.FontFamily = _template_file["Footer"]["FontFamily"];
+    _template_struct.FooterTextSettings.FontSize = _template_file["Footer"]["FontSize"];
+    _template_struct.FooterTextSettings.FontColor = _template_file["Footer"]["FontColor"];
+    _template_struct.FooterTextSettings.FontBold = _template_file["Footer"]["FontBold"];
 
 }

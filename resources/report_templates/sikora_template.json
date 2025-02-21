@@ -41,6 +41,9 @@
     "FontBold": false
   },
   "Footer": {
-
+    "FontFamily": "Times-BoldItalic",
+    "FontSize": 14,
+    "FontColor": "c",
+    "FontBold": false
   }
 }

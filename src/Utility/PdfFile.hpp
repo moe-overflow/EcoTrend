@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <hpdf.h>
+#include <hpdf_types.h>
 #include "../Template/Template.hpp"
 
 namespace
@@ -26,7 +27,7 @@ struct Position final
 class PdfFile
 {
 public:
-    PdfFile(const std::string file_name, const Template pdf_template);
+    PdfFile(const std::string& file_name, const Template& pdf_template);
 
     ~PdfFile();
 
@@ -38,6 +39,10 @@ private:
     void AddHeader() const;
 
     void AddTrendPlot() const;
+
+    void AddStatisticsPlot() const;
+
+    void AddFooter() const;
 
     /**/
 

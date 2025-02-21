@@ -9,6 +9,7 @@ PdfFile::PdfFile(const std::string file_name, const Template pdf_template) :
     if (!_document)
     {
         std::cerr << "Error: Couldn't create pdf" << std::endl;
+        return;
     }
 
     _page = HPDF_AddPage(_document);
@@ -29,6 +30,8 @@ void PdfFile::Create() const
 {
     AddHeader();
     AddTrendPlot();
+    AddStatisticsPlot();
+    AddFooter();
 }
 
 // TODO: Header information as a struct (parameter) + title
@@ -44,7 +47,7 @@ void PdfFile::AddHeader() const
     pos = { json["Logo"]["x"] , json["Logo"]["y"] };
     DrawImage(image_path, pos,.10F);
 
-    // Meta data / header inforamtion
+    // Meta data / header information
     pos = { 60, 770 };
     DrawText("Start at: 08.03.2023 12:34", pos, _template->Get().HeaderTextSettings);
 
@@ -58,7 +61,40 @@ void PdfFile::AddTrendPlot() const
     DrawText("OUTER DIAMETER", pos, _template->Get().MeasurementTitleSettings);
 
     pos = { json["TrendPlot"]["x"] , json["TrendPlot"]["y"] };
-    DrawImage(_file_name + ".png", pos, .30F);
+    DrawImage(_file_name + ".png", pos, .33F);
+
+}
+
+void PdfFile::AddStatisticsPlot() const
+{
+    auto json = JSON_Handler::ReadJsonFile(std::string(TEMPLATE_PATH) + "/debug.json");
+
+    Position pos{ json["StatisticsPlot"]["x"] , json["StatisticsPlot"]["y"] };
+    DrawImage(_file_name + "_statistics.png", pos, .30F);
+
+    // TODO: Add here text of statistic value
+}
+
+void PdfFile::AddFooter() const
+{
+    auto json = JSON_Handler::ReadJsonFile(std::string(TEMPLATE_PATH) + "/debug.json");
+    auto x_array = json["Footer"]["x"];
+
+    TextSettings text_settings = _template->Get().FooterTextSettings;
+
+    // TODO: Separating line
+
+    // Left
+    Position pos = { x_array["Left"] , json["Footer"]["y"] };
+    DrawText("Left", pos, text_settings);
+
+    // Center
+    pos.X = x_array["Center"];
+    DrawText("Center", pos, text_settings);
+
+    // Right
+    pos.X = x_array["Right"];
+    DrawText("Right", pos, text_settings);
 
 }
 
@@ -90,8 +126,6 @@ void PdfFile::DrawImage(const std::string& image_path, const Position& position,
     auto new_height = _page_settings.Height * height_ratio;
     HPDF_Page_DrawImage(_page, image, position.X, position.Y, new_height * aspect_ratio, new_height);
 }
-
-
 
 void PdfFile::Save()
 {
