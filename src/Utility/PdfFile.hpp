@@ -21,7 +21,7 @@ namespace
 
 struct Position final
 {
-    size_t X, Y;
+    float X, Y;
 };
 
 class PdfFile
@@ -54,7 +54,7 @@ private:
 
     struct PageSettings
     {
-        int Width, Height;
+        float Width, Height;
         HPDF_Font FontHandler;
     };
 

@@ -6,7 +6,7 @@
 struct TextSettings
 {
 	std::string FontFamily;
-	size_t FontSize;
+	float FontSize;
 	std::string FontColor;
 	bool FontBold;
 };

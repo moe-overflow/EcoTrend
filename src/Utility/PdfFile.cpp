@@ -116,15 +116,15 @@ void PdfFile::DrawImage(const std::string& image_path, const Position& position,
 {
     HPDF_Image image = HPDF_LoadPngImageFromFile(_document, image_path.c_str());
 
-    auto image_width{ HPDF_Image_GetWidth(image) }, image_height{ HPDF_Image_GetHeight(image) };
+    size_t image_width{ HPDF_Image_GetWidth(image) }, image_height{ HPDF_Image_GetHeight(image) };
 
     // std::cout << "Loaded image (w: " << image_width << ", h: " << image_height << ")" << std::endl;
 
-    const auto aspect_ratio{ image_width / image_height };
+    const float aspect_ratio{ (float) image_width / (float) image_height };
     HPDF_Page_SetLineWidth(_page, 0.5);
 
-    auto new_height = _page_settings.Height * height_ratio;
-    HPDF_Page_DrawImage(_page, image, position.X, position.Y, new_height * aspect_ratio, new_height);
+    float new_height = _page_settings.Height * height_ratio;
+    HPDF_Page_DrawImage(_page, image, position.X, position.Y, new_height * aspect_ratio, float(new_height));
 }
 
 void PdfFile::Save()

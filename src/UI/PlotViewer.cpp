@@ -35,7 +35,7 @@ void PlotViewer::OnRender()
 		{
 			// static ImPlotAxisFlags axis_flags = ImPlotAxisFlags_NoTickLabels;
 			// auto title = "Plot"; // todo: set name of json file as title
-			if (BeginPlot("Test", ImVec2(window_size.x, window_size.y * 0.75)))
+			if (BeginPlot("Test", ImVec2(window_size.x, window_size.y * .75F)))
 			{
 				//SetupAxes(nullptr, nullptr, axis_flags, axis_flags);
 				//SetupAxisLimits();
