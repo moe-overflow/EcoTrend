@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <array>
 #include "../../Template/Template.hpp"
 
 struct SliderData

@@ -77,7 +77,7 @@ void ExportReportPopup::OnExportReport() const
     // Statistics
     // todo / consideration: Shouldn't this be called before exporting the plot since
     // plot should include some statistics values
-    Statistics statistics = StatisticCalculation::CalculateStatistics(_data._Values, { 17000, 16000, 18000 });
+    Statistics const statistics = StatisticCalculation::CalculateStatistics(_data._Values, { 17000, 16000, 18000 });
 
     PlotExporter::ExportPlot(_data._ImagePath, { _data._Timestamps, _data._Values }, _data._PlotLimits);
 

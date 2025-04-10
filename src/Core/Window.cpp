@@ -2,15 +2,19 @@
 
 #include "../UI/Layer/Layer.hpp"
 #include "../Utility/JsonHandler.hpp"
+
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 #include "implot.h"
+
+#include <glad/glad.h>
 
 using json = nlohmann::json;
 
 Window::Window(WindowSettings const& settings)
     : _settings{ std::make_shared<WindowSettings>(settings) },
       _glfw_window{ nullptr }
-{
-}
+{}
 
 Window::~Window()
 {
@@ -67,7 +71,7 @@ void Window::Init_GLFW()
     BindFramebuffer(buffer_width, buffer_height);
 }
 
-void Window::Init_ImGUI()
+void Window::Init_ImGUI() const
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -103,7 +107,7 @@ void Window::Init_ImGUI()
     //glEnable(GL_DEPTH_TEST);
 }
 
-void Window::Render()
+void Window::Render() const
 {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -119,7 +123,7 @@ void Window::Render()
 
     /**/
 
-    for (auto& layer : _layer_stack)
+    for (auto const& layer : _layer_stack)
     {
         layer->OnRender();
     }
@@ -195,7 +199,7 @@ void Window::AttachDockspace(bool* p_open)
     ImGuiIO& io = ImGui::GetIO();
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
     {
-        ImGuiID dockspace_id = ImGui::GetID("DockSpace");
+        ImGuiID const dockspace_id = ImGui::GetID("DockSpace");
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
     }
     ImGui::End();
@@ -206,7 +210,7 @@ void Window::SwapBuffers() const
     glfwSwapBuffers(_glfw_window);
 }
 
-void Window::BindFramebuffer(int width, int height)
+void Window::BindFramebuffer(int const width, int const height)
 {
     GLuint frame_buffer;
     GLuint render_buffer;
@@ -237,14 +241,14 @@ void Window::BindFramebuffer(int width, int height)
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 }
 
-std::pair<double, double> Window::GetMousePosition()
+std::pair<double, double> Window::GetMousePosition() const
 {
     double x, y;
     glfwGetCursorPos(_glfw_window, &x, &y);
     return std::pair{ x, y };
 }
 
-void Window::HandleEvents()
+void Window::HandleEvents() const
 {
     glfwPollEvents();
     _settings->UpdateSize(_glfw_window);
@@ -260,14 +264,14 @@ void Window::Destroy() const
     glfwSetWindowShouldClose(_glfw_window, true);
 }
 
-std::pair<int, int> Window::GetWindowPosition()
+std::pair<int, int> Window::GetWindowPosition() const
 {
     int x, y;
     glfwGetWindowPos(_glfw_window, &x, &y);
     return { x, y };
 }
 
-void Window::SaveSettings()
+void Window::SaveSettings() const
 {
     std::string const path = std::string(TEMPLATE_PATH) + "/config.json";
     nlohmann::json j = JSON_Handler::ReadJsonFile(path);

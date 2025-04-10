@@ -6,7 +6,7 @@
 class Popup : public Layer
 {
 public:
-    virtual ~Popup() = default;
+    ~Popup() override = default;
 
     [[nodiscard]] LayerType GetType() const override
     {
@@ -32,7 +32,7 @@ public:
     }
 
 private:
-    PlotData _data;
+    PlotData _data{};
 
     std::string _image_name;
 

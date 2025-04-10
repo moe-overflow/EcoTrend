@@ -12,7 +12,7 @@ void PlotViewer::OnRender()
 {
     Begin("Plot");
     {
-        auto window_size = GetWindowSize();
+        auto const window_size = GetWindowSize();
         ImPlotRect current_limits;
 
         if (BeginPlot("Plot Viewer", ImVec2(window_size.x, window_size.y * .90F)))
@@ -27,7 +27,7 @@ void PlotViewer::OnRender()
             );
 
             // SetNextPlotTicksX(timestamps.data(), time_labels.data(), timestamps.size(), ImPlot::TickFormatter);
-            current_limits = ImPlot::GetPlotLimits();
+            current_limits = GetPlotLimits();
             EndPlot();
         }
 
@@ -67,7 +67,7 @@ void PlotViewer::SetPlotData(nlohmann::json const& data)
     }
 
     // Auto fit axes
-    ImPlot::SetNextAxesToFit();
+    SetNextAxesToFit();
 
 }
 

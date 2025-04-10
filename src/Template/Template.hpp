@@ -16,12 +16,12 @@ enum class FontFamilyOption
     Times_Bold
 };
 
-inline static std::string FontFamilyEnumToString(FontFamilyOption enum_element)
+static std::string FontFamilyEnumToString(FontFamilyOption enum_element)
 {
     return std::string(magic_enum::enum_name(enum_element));
 }
 
-inline static FontFamilyOption FontFamilyStringToEnum(std::string& str)
+static FontFamilyOption FontFamilyStringToEnum(std::string& str)
 {
     // Font families use hyphen instead of underscore, so it has to be
     // converted to an underscore because of enum class
@@ -31,8 +31,8 @@ inline static FontFamilyOption FontFamilyStringToEnum(std::string& str)
 
     if (value.has_value())
         return value.value();
-    else
-        throw std::runtime_error("Unknown Font Family!");
+
+    throw std::runtime_error("Unknown Font Family!");
 }
 
 struct Color final
@@ -83,7 +83,7 @@ class Template
 public:
     Template() = delete;
 
-    Template(std::string const& template_file_name);
+    explicit Template(std::string const& template_file_name);
 
     Template(Template const&) = delete;
     Template& operator=(Template const&) = delete;

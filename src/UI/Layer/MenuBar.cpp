@@ -14,7 +14,6 @@ void MenuBar::OnAttach()
     _light_mode = _window_settings->LightMode;
 }
 
-
 void MenuBar::OnRender()
 {
     if (BeginMainMenuBar())

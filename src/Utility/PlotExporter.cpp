@@ -5,7 +5,7 @@
 
 using namespace matplot;
 
-bool PlotExporter::ExportPlot(std::string const file_name, Dataset const& dataset, PlotLimits limits)
+bool PlotExporter::ExportPlot(std::string const& file_name, Dataset const& dataset, PlotLimits const& limits)
 {
     auto json = JSON_Handler::ReadJsonFile(std::string(TEMPLATE_PATH) + "/plot_debug.json");
 

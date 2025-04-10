@@ -5,11 +5,6 @@
 #include <string>
 #include <vector>
 
-#include "glad/glad.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-
 #include "../UI/Layer/Layer.hpp"
 
 class Layer;
@@ -29,15 +24,15 @@ public:
 
     void Init();
 
-    void Render();
+    void Render() const;
 
     [[nodiscard]] bool ShouldClose() const;
 
-    void HandleEvents();
+    void HandleEvents() const;
 
     void Destroy() const;
 
-    [[nodiscard]] std::pair<int, int> GetWindowPosition();
+    [[nodiscard]] std::pair<int, int> GetWindowPosition() const;
 
     template<typename T>
     [[nodiscard]] std::shared_ptr<T> GetLayer(LayerType type)
@@ -58,9 +53,9 @@ public:
 
     static void BindFramebuffer(int width, int height);
 
-    [[nodiscard]] std::pair<double, double> GetMousePosition();
+    [[nodiscard]] std::pair<double, double> GetMousePosition() const;
 
-    void SaveSettings();
+    void SaveSettings() const;
 
     [[nodiscard]] inline std::shared_ptr<WindowSettings> GetSettings()
     {
@@ -83,7 +78,7 @@ private:
 
     GLFWwindow* _glfw_window;
 
-    void Init_ImGUI();
+    void Init_ImGUI() const;
 
     void Init_GLFW();
 
@@ -91,5 +86,5 @@ private:
 
     std::vector<std::shared_ptr<Layer>> _layer_stack;
 
-    bool _light_mode;
+    bool _light_mode{};
 };

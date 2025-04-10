@@ -86,20 +86,20 @@ private:
 
     /**/
 
-    void ReadTextDesignersAttributes();
+    void ReadTextDesignersAttributes() const;
     
-    void ReadPlotDesignersAttributes();
+    void ReadPlotDesignersAttributes() const;
 
     /**/
 
-    void AssignTextSettings(size_t index, TextAttributes const& settings);
+    void AssignTextSettings(size_t index, TextAttributes const& settings) const;
 
-    void AssignPlotSettings(size_t index, PlotAttributes const& settings);
+    void AssignPlotSettings(size_t index, PlotAttributes const& settings) const;
 
     /**/
 
-    void ApplyTextAttributes(size_t index, TextAttributes& settings);
+    void ApplyTextAttributes(size_t index, TextAttributes& settings) const;
 
-    void ApplyPlotAttributes(size_t index, PlotAttributes& settings);
+    void ApplyPlotAttributes(size_t index, PlotAttributes& settings) const;
 
 };

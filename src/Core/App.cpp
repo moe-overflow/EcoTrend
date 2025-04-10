@@ -4,7 +4,6 @@
 #include "../UI/Layer/TemplateDesigner.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 
 App::App() :
       _window{ std::make_unique<Window>(std::move(ReadConfigSettings())) },

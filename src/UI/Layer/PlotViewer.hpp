@@ -2,13 +2,12 @@
 
 #include <memory>
 
-#include "../../Utility/JsonHandler.hpp"
 #include "Layer.hpp"
 #include "../Popup/Popup.hpp"
 
 #include "../../Data/PlotData.hpp"
 
-class PlotViewer : public Layer
+class PlotViewer final : public Layer
 {
 public:
     void OnRender() override;
@@ -36,7 +35,7 @@ private:
 
     std::unique_ptr<ExportReportPopup> _export_report_popup = std::make_unique<ExportReportPopup>();
 
-    PlotData _plot_data;
+    PlotData _plot_data{};
 
     /**/
 

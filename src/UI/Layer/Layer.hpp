@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <utility>
 #include "../../Core/WindowSettings.hpp"
 
 enum class LayerType
@@ -33,7 +34,7 @@ public:
 class Dockspace : public Layer
 {
 public:
-    virtual void OnRender() override;
+    void OnRender() override;
 
     [[nodiscard]] LayerType GetType() const override
     {
@@ -48,13 +49,13 @@ class MenuBar : public Layer
 {
 public:
 
-    MenuBar(std::shared_ptr<WindowSettings> settings) : 
-        _window_settings{ settings }
+    explicit MenuBar(std::shared_ptr<WindowSettings> settings) :
+        _window_settings{std::move( settings )}
     { } 
 
-    virtual void OnRender() override;
+    void OnRender() override;
 
-    virtual void OnAttach() override;
+    void OnAttach() override;
 
     [[nodiscard]] LayerType GetType() const override
     {

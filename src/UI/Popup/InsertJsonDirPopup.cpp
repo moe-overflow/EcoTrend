@@ -40,7 +40,7 @@ void InsertJsonDirPopup::OnRender()
         // Revert to default colors after rendering the input field
         if (!is_valid_directory)
         {
-            ImGui::PopStyleColor(1); // Pop 5 colors (we pushed 5 for text, border, and background)
+            PopStyleColor(1); // Pop 5 colors (we pushed 5 for text, border, and background)
         }
         
         

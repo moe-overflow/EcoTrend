@@ -128,16 +128,16 @@ void TemplateDesigner::OnRenderPlotDesigner(std::unique_ptr<PlotDesigner> const&
 }
 
 
-void TemplateDesigner::ReadTextDesignersAttributes()
+void TemplateDesigner::ReadTextDesignersAttributes() const
 {
     // TODO: replace 3 with enum size or better: read values directly from enum instead of declaring strings
-    std::array<std::string, 3> widget_types = { "Slider", "ComboWidget", "ColorPickerWidget" };
+    std::array<std::string, 3> const widget_types = { "Slider", "ComboWidget", "ColorPickerWidget" };
 
     for (auto& w_type : widget_types)
     {
         for (auto& d_type : magic_enum::enum_values<TextDesignerType>())
         {
-            auto index = magic_enum::enum_integer(d_type);
+            auto const index = magic_enum::enum_integer(d_type);
 
             if (w_type == widget_types[0])
             {
@@ -170,15 +170,15 @@ void TemplateDesigner::ReadTextDesignersAttributes()
     }
 }
 
-void TemplateDesigner::ReadPlotDesignersAttributes()
+void TemplateDesigner::ReadPlotDesignersAttributes() const
 {
-    std::array<std::string, 2> widget_types = { "Slider", "ColorPickerWidget" };
+    std::array<std::string, 2> const widget_types = { "Slider", "ColorPickerWidget" };
 
     for (auto& w_type : widget_types)
     {
         for (auto& d_type : magic_enum::enum_values<PlotDesignerType>())
         {
-            auto index = magic_enum::enum_integer(d_type);
+            auto const index = magic_enum::enum_integer(d_type);
 
             if (w_type == widget_types[0])
             {
@@ -200,14 +200,14 @@ void TemplateDesigner::ReadPlotDesignersAttributes()
     }
 }
 
-void TemplateDesigner::AssignTextSettings(size_t index, TextAttributes const& settings)
+void TemplateDesigner::AssignTextSettings(size_t index, TextAttributes const& settings) const
 {
     _text_designers[index]->FontSizeDesigner.Index = settings.FontSize;
     _text_designers[index]->FontFamilyDesigner.Index = magic_enum::enum_index(settings.FontFamily).value();
     _text_designers[index]->ColorDesigner.Color = { settings.FontColor.R, settings.FontColor.G, settings.FontColor.B };
 }
 
-void TemplateDesigner::AssignPlotSettings(size_t index, PlotAttributes const& settings)
+void TemplateDesigner::AssignPlotSettings(size_t index, PlotAttributes const& settings) const
 {
     _plot_designers[index]->LineWidthSlider.Index = settings.LineWidth;
     _plot_designers[index]->ColorDesigner.Color = { settings.CurveColor.R,
@@ -215,7 +215,7 @@ void TemplateDesigner::AssignPlotSettings(size_t index, PlotAttributes const& se
                                                     settings.CurveColor.B };
 }
 
-void TemplateDesigner::ApplyTextAttributes(size_t index, TextAttributes& settings)
+void TemplateDesigner::ApplyTextAttributes(size_t index, TextAttributes& settings) const
 {
     // clang-format off
     settings = {
@@ -228,7 +228,7 @@ void TemplateDesigner::ApplyTextAttributes(size_t index, TextAttributes& setting
     // clang-format on
 }
 
-void TemplateDesigner::ApplyPlotAttributes(size_t index, PlotAttributes& settings)
+void TemplateDesigner::ApplyPlotAttributes(size_t const index, PlotAttributes& settings) const
 {
     // clang-format off
     settings = {
