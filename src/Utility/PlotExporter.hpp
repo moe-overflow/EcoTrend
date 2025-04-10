@@ -1,11 +1,16 @@
 #pragma once
 
+#include <string>
 #include <vector>
+
+#include "../Data/PlotData.hpp"
 
 class PlotExporter
 {
-public:
-    static void ExportPlot(const std::vector<double>& x ,const std::vector<double>& y,
-                              double x_min, double x_max, double y_min, double y_max);
-};
+    using Dataset = std::pair<std::vector<double>, std::vector<double>>;
 
+public:
+    static bool ExportPlot(std::string const file_name, Dataset const& dataset, PlotLimits limits);
+
+    static bool ExportStatisticsPlot(std::string const& file_name, StatisticCalculation::Axes const& axes);
+};

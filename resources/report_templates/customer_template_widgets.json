@@ -1,0 +1,138 @@
+{
+  "Text": {
+    "Slider": {
+      "Title": {
+        "Label": "Select Font Size For Title",
+        "Min": 8,
+        "Max": 32
+      },
+      "Header": {
+        "Label": "Select Font Size for Header",
+        "Min": 1,
+        "Max": 4
+      },
+      "MeasurementTitle": {
+        "Label": "Select Font Size for MeasurementTitle",
+        "Min": 1,
+        "Max": 4
+      },
+      "StatisticsText": {
+        "Label": "Select Font Size for StatisticsText",
+        "Min": 1,
+        "Max": 4
+      },
+      "Footer": {
+        "Label": "Select Font Size for Footer",
+        "Min": 1,
+        "Max": 4
+      }
+    },
+    "ComboWidget": {
+      "Title": {
+        "Label": "Select Font Family For Title",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "Header": {
+        "Label": "Select Font Family For Header",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "MeasurementTitle": {
+        "Label": "Select Font Family For Measurement Title",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "StatisticsText": {
+        "Label": "Select Font Family For Statistics Text",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "Footer": {
+        "Label": "Select Font Family For Footer",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      }
+    },
+    "ColorPickerWidget": {
+      "Title": {
+        "Label": "Select Color For Title"
+      },
+      "Header": {
+        "Label": "Select Color for Header"
+      },
+      "MeasurementTitle": {
+        "Label": "Select Color for MeasurementTitle"
+      },
+      "StatisticsText": {
+        "Label": "Select Color for StatisticsText"
+      },
+      "Footer": {
+        "Label": "Select Color for Footer"
+      },
+      "Trend": {
+        "Label": "Select Color for Trend curve"
+      },
+      "Statistics": {
+        "Label": "Select Color for Trend curve"
+      }
+    }
+  },
+  "Plot": {
+    "Slider": {
+      "Trend": {
+        "Label": "Select Line Width of Trend",
+        "Min": 1,
+        "Max": 4
+      },
+      "Statistics": {
+        "Label": "Select Line Width of Statistics",
+        "Min": 1,
+        "Max": 4
+      }
+    },
+    "ColorPickerWidget": {
+      "Trend": {
+        "Label": "Select Color for Trend curve"
+      },
+      "Statistics": {
+        "Label": "Select Color for Statistics curve"
+      }
+    }
+  }
+}

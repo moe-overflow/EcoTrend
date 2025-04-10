@@ -1,0 +1,43 @@
+{
+  "Logo": {
+    "x": 380,
+    "y": 750
+  },
+  "Header": {
+    "y_top": 740,
+    "y_down": 600,
+    "x_left": 60,
+    "x_right": 360,
+    "y_offset": 20
+  },
+  "MeasurementTitle": {
+    "x": 60,
+    "y": 630
+  },
+  "TrendPlot": {
+    "x": 10,
+    "y": 325
+  },
+  "StatisticsPlot": {
+    "x": 60,
+    "y": 80
+  },
+  "StatisticsValues": {
+    "x": 350,
+    "y_start": 300,
+    "y_offset": 20
+  },
+  "Footer": {
+    "separator": 50,
+    "x": {
+      "Left": 100,
+      "Center": 250,
+      "Right": 450
+    },
+    "y": 20
+  },
+  "Separator": {
+    "x_start": 50,
+    "x_end": 500
+  }
+}

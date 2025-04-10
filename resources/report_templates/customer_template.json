@@ -1,0 +1,66 @@
+{
+    "Footer": {
+        "FontColor": {
+            "B": 0,
+            "G": 0,
+            "R": 0
+        },
+        "FontFamily": "Courier",
+        "FontSize": 4
+    },
+    "Header": {
+        "FontColor": {
+            "B": 23,
+            "G": 230,
+            "R": 16
+        },
+        "FontFamily": "Helvetica",
+        "FontSize": 3
+    },
+    "Logo": {
+        "ImageName": "CUSTOM"
+    },
+    "MeasurementTitle": {
+        "FontColor": {
+            "B": 200,
+            "G": 124,
+            "R": 12
+        },
+        "FontFamily": "Courier",
+        "FontSize": 1
+    },
+    "StatisticsPlot": {
+        "CurveColor": {
+            "B": 1,
+            "G": 124,
+            "R": 121
+        },
+        "LineWidth": 1
+    },
+    "StatisticsValues": {
+        "FontColor": {
+            "B": 199,
+            "G": 124,
+            "R": 12
+        },
+        "FontFamily": "Courier",
+        "FontSize": 4
+    },
+    "Title": {
+        "FontColor": {
+            "B": 199,
+            "G": 124,
+            "R": 12
+        },
+        "FontFamily": "Courier",
+        "FontSize": 32
+    },
+    "TrendPlot": {
+        "CurveColor": {
+            "B": 199,
+            "G": 124,
+            "R": 12
+        },
+        "LineWidth": 1
+    }
+}

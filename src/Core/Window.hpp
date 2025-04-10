@@ -1,89 +1,95 @@
+#pragma once
+
+#include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
 
 #include "glad/glad.h"
-#include "GLFW/glfw3.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-#include "../UI/Layer.hpp"
+
+#include "../UI/Layer/Layer.hpp"
 
 class Layer;
 
 class Window
 {
 public:
+    explicit Window(WindowSettings const& settings);
 
-	struct Window_Settings
-	{
-		unsigned int Width, Height;
-		std::string Title = "EcoTrend";
-	};
+    Window(Window const&) = delete;
+    Window(Window&&) = default;
 
-	explicit Window(const Window_Settings& settings);
+    Window& operator=(Window const&) = delete;
+    Window& operator=(Window&&) = default;
 
-	Window(const Window&) = delete;
-	Window(Window&&) = default;
+    ~Window();
 
-	Window& operator=(const Window&) = delete;
-	Window& operator=(Window&&) = default;
+    void Init();
 
+    void Render();
 
-	~Window();
+    [[nodiscard]] bool ShouldClose() const;
 
-	void Init();
+    void HandleEvents();
 
-	void Render();
-	
-	[[nodiscard]] bool Should_Close() const;
+    void Destroy() const;
 
-	void Handle_Events() const;
-	
-	void Destroy() const;
-
-	void AddLayer(const std::shared_ptr<Layer>& layer);
+    [[nodiscard]] std::pair<int, int> GetWindowPosition();
 
     template<typename T>
-    std::shared_ptr<T> GetLayer(LayerType type)
+    [[nodiscard]] std::shared_ptr<T> GetLayer(LayerType type)
     {
-        auto it = std::find_if
-        (
-			_layer_stack.begin(), _layer_stack.end(),
-			[type](const std::shared_ptr<Layer>& layer)
-			{
-				return layer->GetType() == type;
-			}
+        auto it = std::find_if(
+                _layer_stack.begin(),
+                _layer_stack.end(),
+                [type](std::shared_ptr<Layer> const& layer) { return layer->GetType() == type; }
         );
 
-        if(it != _layer_stack.end()) return std::dynamic_pointer_cast<T>(*it);
+        if (it != _layer_stack.end())
+            return std::dynamic_pointer_cast<T>(*it);
 
         throw std::runtime_error("Layer not found");
-
     }
 
-    void SaveChart();
+    void SwapBuffers() const;
 
-	void BindFramebuffer(int width, int height);
+    static void BindFramebuffer(int width, int height);
 
-	void SwapBuffers() const;
+    [[nodiscard]] std::pair<double, double> GetMousePosition();
+
+    void SaveSettings();
+
+    [[nodiscard]] inline std::shared_ptr<WindowSettings> GetSettings()
+    {
+        return _settings;
+    }
+
+    template<typename T, typename... Args>
+    T& AddLayer(Args&&... args)
+    {
+        static_assert(std::is_base_of<Layer, T>::value);
+        auto layer = std::make_shared<T>(std::forward<Args>(args)...);
+        T& ref = *layer;
+        _layer_stack.emplace_back(layer);
+        layer->OnAttach();
+        return ref;
+    }
 
 private:
+    std::shared_ptr<WindowSettings> _settings;
 
-    void Init_ImGUI() const;
+    GLFWwindow* _glfw_window;
+
+    void Init_ImGUI();
 
     void Init_GLFW();
 
-	void AttachDockspace(bool* p_open) const;
+    static void AttachDockspace(bool* p_open);
 
+    std::vector<std::shared_ptr<Layer>> _layer_stack;
 
-private:
-	Window_Settings _settings;
-
-	GLFWwindow* _glfw_window;
-
-	std::vector<std::shared_ptr<Layer>> _layer_stack;
-
-    bool _save_chart = false;
+    bool _light_mode;
 };
-

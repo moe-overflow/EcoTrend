@@ -1,0 +1,217 @@
+{
+  "Static": {
+    "Slider": {
+      "Title": {
+        "Label": "Select Font Size For Title",
+        "Min": 8,
+        "Max": 32
+      },
+      "Header": {
+        "Label": "Select Font Size for Header",
+        "Min": 1,
+        "Max": 4
+      },
+      "MeasurementTitle": {
+        "Label": "Select Font Size for MeasurementTitle",
+        "Min": 1,
+        "Max": 4
+      },
+      "StatisticsText": {
+        "Label": "Select Font Size for StatisticsText",
+        "Min": 1,
+        "Max": 4
+      },
+      "Footer": {
+        "Label": "Select Font Size for Footer",
+        "Min": 1,
+        "Max": 4
+      },
+      "Trend": {
+        "Label": "Select Line Width of Trend",
+        "Min": 1,
+        "Max": 4,
+        "Position": {
+          "X": 12,
+          "Y": 4
+        }
+      },
+      "Statistics": {
+        "Label": "Select Line Width of Statistics",
+        "Min": 1,
+        "Max": 4,
+        "Position": {
+          "X": 23,
+          "Y": 523
+        }
+      }
+    },
+    "ComboWidget": {
+      "Title": {
+        "Label": "Select Font Family For Title",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "Header": {
+        "Label": "Select Font Family For Header",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "MeasurementTitle": {
+        "Label": "Select Font Family For Measurement Title",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "StatisticsText": {
+        "Label": "Select Font Family For Statistics Text",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      },
+      "Footer": {
+        "Label": "Select Font Family For Footer",
+        "ListContent": [
+          "Helvetica",
+          "Times_Roman",
+          "Courier",
+          "Symbol",
+          "ZapfDingbats",
+          "Times_BoldItalic",
+          "Times_Bold"
+        ]
+      }
+    },
+    "ColorPickerWidget": {
+      "Title": {
+        "Label": "Select Color For Title"
+      },
+      "Header": {
+        "Label": "Select Color Size for Header"
+      },
+      "MeasurementTitle": {
+        "Label": "Select Color Size for MeasurementTitle"
+      },
+      "StatisticsText": {
+        "Label": "Select Color Size for StatisticsText"
+      },
+      "Footer": {
+        "Label": "Select Color Size for Footer"
+      },
+      "Trend": {
+        "Label": "Select Coolor for Trend curve"
+      },
+      "Statistics": {
+        "Label": "Select Coolor for Trend curve"
+      }
+    }
+  },
+  "Dynamic": {
+    "Slider": {
+      "Title": {
+        "Index": 32
+      },
+      "Header": {
+        "Index": 4
+      },
+      "MeasurementTitle": {
+        "Index": 4
+      },
+      "StatisticsText": {
+        "Index": 4
+      },
+      "Footer": {
+        "Index": 4
+      },
+      "Trend": {
+        "Index": 1
+      },
+      "Statistics": {
+        "Index": 2
+      }
+    },
+    "ComboWidget": {
+      "Title": {
+        "Index": 1
+      },
+      "Header": {
+        "Index": 3
+      },
+      "MeasurementTitle": {
+        "Index": 1
+      },
+      "StatisticsText": {
+        "Index": 1
+      },
+      "Footer": {
+        "Index": 3
+      }
+    },
+    "ColorPickerWidget": {
+      "TextColor": {
+        "Title": {
+          "R": 123,
+          "G": 135,
+          "B": 11
+        },
+        "Header": {
+          "R": 123,
+          "G": 2,
+          "B": 11
+        },
+        "MeasurementTitle": {
+          "R": 123,
+          "G": 211,
+          "B": 199
+        },
+        "StatisticsText": {
+          "R": 123,
+          "G": 233,
+          "B": 11
+        },
+        "Footer": {
+          "R": 123,
+          "G": 2,
+          "B": 11
+        }
+      },
+      "CurveColor": {
+        "Trend": {
+          "R": 123,
+          "G": 135,
+          "B": 11
+        },
+        "Statistics": {
+          "R": 123,
+          "G": 2,
+          "B": 11
+        }
+      }
+    }
+  }
+}

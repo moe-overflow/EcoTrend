@@ -1,0 +1,23 @@
+{
+  "trend": {
+    "line_width": 1,
+    "color": "black",
+    "font_size": 26,
+    "resolution": {
+      "x": 2000,
+      "y": 1000
+    },
+    "font_weight": "ultrabold"
+  },
+  "statistics": {
+    "line_width": 1,
+    "color": "green",
+    "font_size": 20,
+    "fig_font_size": 20,
+    "resolution": {
+      "x": 800,
+      "y": 800
+    },
+    "font_weight": "ultrabold"
+  }
+}

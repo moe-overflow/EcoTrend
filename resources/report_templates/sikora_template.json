@@ -1,0 +1,66 @@
+{
+  "Title": {
+    "FontSize": 24,
+    "FontFamily": "Helvetica",
+    "FontColor": {
+      "R": 5,
+      "G": 40,
+      "B": 237
+    }
+  },
+  "Logo": {
+    "ImageName": "SIKORA"
+  },
+  "Header": {
+    "FontSize": 12,
+    "FontFamily": "Helvetica",
+    "FontColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0
+    }
+  },
+  "MeasurementTitle": {
+    "FontSize": 16,
+    "FontFamily": "Helvetica",
+    "FontColor": {
+      "R": 5,
+      "G": 40,
+      "B": 237
+    }
+  },
+  "TrendPlot": {
+    "CurveColor": {
+      "R": 12,
+      "G": 124,
+      "B": 199
+    },
+    "LineWidth": 1
+  },
+  "StatisticsPlot": {
+    "CurveColor": {
+      "R": 121,
+      "G": 124,
+      "B": 1
+    },
+    "LineWidth": 1
+  },
+  "StatisticsValues": {
+    "FontSize": 12,
+    "FontFamily": "Helvetica",
+    "FontColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0
+    }
+  },
+  "Footer": {
+    "FontSize": 12,
+    "FontFamily": "Helvetica",
+    "FontColor": {
+      "R": 5,
+      "G": 40,
+      "B": 237
+    }
+  }
+}

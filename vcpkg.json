@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "trendreporter",
+  "version": "0.1",
+  "builtin-baseline": "03329353b413041b124c4b2ee8b1d42b4a66abec",
+  "dependencies": [
+    {
+      "name": "glfw3",
+      "version>=": "3.4#1"
+    },
+    {
+      "name": "imgui",
+      "version>=": "1.91.0",
+      "default-features": false,
+      "features": [
+        "docking-experimental",
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    },
+    {
+      "name": "implot",
+      "version>=": "0.16"
+    },
+    {
+      "name": "libharu",
+      "version>=": "2.4.4#1"
+    },
+    {
+      "name": "nlohmann-json",
+      "version>=": "3.11.3#1"
+    },
+    {
+      "name": "glad",
+      "version>=": "0.1.36"
+    },
+    {
+      "name": "matplotplusplus",
+      "version>=": "1.2.1"
+    },
+    {
+      "name": "stb",
+      "version>=": "2024-07-29#1"
+    },
+    {
+      "name": "magic-enum",
+      "version>=": "0.9.7#1"
+    }
+  ]
+
+}

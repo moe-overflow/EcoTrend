@@ -5,21 +5,11 @@ file(
 )
 
 add_executable(
-        Ecotrend
-        ${CMAKE_SOURCE_DIR}/vendor/stb/stb_image.h
-        ${CMAKE_SOURCE_DIR}/vendor/stb/stb_image_write.h
+        ${TARGET_NAME}
         ${SOURCE_FILES}
-
 )
 
-target_link_libraries(
-    Ecotrend
-
-    PUBLIC imgui
-    PUBLIC glfw
-    PUBLIC glad
-    PUBLIC implot
-    PRIVATE nlohmann_json::nlohmann_json
-    PUBLIC matplot
-)
+include(${CMAKE_SOURCE_DIR}/deps.cmake)
+find_packages()
+link_libs(${TARGET_NAME})
 
